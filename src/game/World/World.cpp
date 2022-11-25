@@ -2313,7 +2313,7 @@ void World::ShutdownServ(uint32 time, uint32 options, uint8 exitcode)
     }
 
 #ifdef ENABLE_PLAYERBOTS
-    sRandomPlayerbotMgr.LogoutAllBots();
+    //sRandomPlayerbotMgr.LogoutAllBots();
 #endif
 
 }
