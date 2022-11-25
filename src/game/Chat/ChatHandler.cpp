@@ -316,7 +316,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recv_data)
             if (lang != LANG_ADDON && !m_anticheat->IsSilenced())
                 m_anticheat->Whisper(msg, player->GetObjectGuid());
 #ifdef ENABLE_PLAYERBOTS
-            if (player->GetPlayerbotAI())
+            if (player->GetPlayerbotAI() && lang != LANG_ADDON)
             {
                 player->GetPlayerbotAI()->HandleCommand(type, msg, *GetPlayer(), lang);
                 GetPlayer()->m_speakTime = 0;
@@ -362,7 +362,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recv_data)
             for (GroupReference* itr = group->GetFirstMember(); itr != NULL; itr = itr->next())
             {
                 Player* player = itr->getSource();
-                if (player && player->GetPlayerbotAI())
+                if (player && player->GetPlayerbotAI() && lang != LANG_ADDON)
                 {
                     player->GetPlayerbotAI()->HandleCommand(type, msg, *GetPlayer(), lang);
                     GetPlayer()->m_speakTime = 0;
