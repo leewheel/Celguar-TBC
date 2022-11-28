@@ -408,7 +408,6 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recv_data)
                     }
                 }
             }
-
             sRandomPlayerbotMgr.HandleCommand(type, msg, *_player, "", GetPlayer()->GetTeam(), lang);
 #endif
 
