@@ -573,7 +573,6 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recv_data)
                 }
             }
 #endif
-
         } break;
 
         case CHAT_MSG_BATTLEGROUND:
