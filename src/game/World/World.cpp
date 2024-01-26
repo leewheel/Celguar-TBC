@@ -1075,6 +1075,10 @@ void World::SetInitialWorldSettings()
     ///- Remove the bones (they should not exist in DB though) and old corpses after a restart
     CharacterDatabase.PExecute("DELETE FROM corpse WHERE corpse_type = '0' OR time < (" _UNIXTIME_ "-'%u')", 3 * DAY);
 
+#ifdef ENABLE_IMMERSIVE
+    sImmersive.Init();
+#endif
+
     /// load spell_dbc first! dbc's need them
     sLog.outString("Loading spell_template...");
     sObjectMgr.LoadSpellTemplate();
@@ -1827,6 +1831,10 @@ void World::Update(uint32 diff)
 #endif
     sRandomPlayerbotMgr.UpdateAI(diff);
     sRandomPlayerbotMgr.UpdateSessions(diff);
+#endif
+
+#ifdef ENABLE_IMMERSIVE
+    sImmersive.Update(diff);
 #endif
 
     /// <li> Handle session updates
