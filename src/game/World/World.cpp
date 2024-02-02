@@ -1502,6 +1502,10 @@ void World::SetInitialWorldSettings()
     sScriptDevAIMgr.Initialize();
     sLog.outString();
 
+#ifdef ENABLE_ACHIEVEMENTS
+    sAchievementsMgr.Init();
+#endif
+
     // after SD2
     sLog.outString("Loading spell scripts...");
     SpellScriptMgr::LoadScripts();
