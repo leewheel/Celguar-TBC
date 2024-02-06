@@ -84,6 +84,10 @@
 #include "AchievementsMgr.h"
 #endif
 
+#ifdef ENABLE_HARDCORE
+#include "HardcoreMgr.h"
+#endif
+
 #include "AI/ScriptDevAI/scripts/custom/Transmogrification.h"
 
 #include <cmath>
@@ -905,6 +909,10 @@ bool Player::Create(uint32 guidlow, const std::string& name, uint8 race, uint8 c
 
 #ifdef ENABLE_ACHIEVEMENTS
     sAchievementsMgr.OnPlayerCharacterCreated(this);
+#endif
+
+#ifdef ENABLE_HARDCORE
+    sHardcoreMgr.OnPlayerCharacterCreated(this);
 #endif
 
     LearnDefaultSkills();
@@ -4553,6 +4561,10 @@ void Player::DeleteFromDB(ObjectGuid playerguid, uint32 accountId, bool updateRe
             sAchievementsMgr.OnPlayerDeletedFromDB(lowguid);
 #endif
 
+#ifdef ENABLE_HARDCORE
+            sHardcoreMgr.OnPlayerCharacterDeletedFromDB(lowguid);
+#endif
+
             break;
         }
         // The character gets unlinked from the account, the name gets freed up and appears as deleted ingame
@@ -4657,6 +4669,11 @@ void Player::BuildPlayerRepop()
 
 void Player::ResurrectPlayer(float restore_percent, bool applySickness)
 {
+#ifdef ENABLE_HARDCORE
+    if (!sHardcoreMgr.OnPlayerPreResurrect(this))
+        return;
+#endif
+
     WorldPacket data(SMSG_DEATH_RELEASE_LOC, 4 * 4);        // remove spirit healer position
     data << uint32(-1);
     data << float(0);
@@ -4707,6 +4724,10 @@ void Player::ResurrectPlayer(float restore_percent, bool applySickness)
 
 #ifdef ENABLE_IMMERSIVE
     sImmersiveMgr.OnPlayerResurrect(this);
+#endif
+
+#ifdef ENABLE_HARDCORE
+    sHardcoreMgr.OnPlayerResurrect(this);
 #endif
 
     if (!applySickness)
@@ -5141,6 +5162,10 @@ void Player::RepopAtGraveyard()
         if (updateVisibility && IsInWorld())
             UpdateVisibilityAndView();
     }
+
+#ifdef ENABLE_HARDCORE
+    sHardcoreMgr.OnPlayerReleaseSpirit(this, ClosestGrave);
+#endif
 }
 
 void Player::JoinedChannel(Channel* c)

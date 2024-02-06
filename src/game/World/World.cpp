@@ -1079,6 +1079,10 @@ void World::SetInitialWorldSettings()
     sImmersiveMgr.Init();
 #endif
 
+#ifdef ENABLE_HARDCORE
+    sHardcoreMgr.PreLoad();
+#endif
+
     /// load spell_dbc first! dbc's need them
     sLog.outString("Loading spell_template...");
     sObjectMgr.LoadSpellTemplate();
@@ -1501,10 +1505,6 @@ void World::SetInitialWorldSettings()
     sLog.outString("Initializing Scripting Library...");
     sScriptDevAIMgr.Initialize();
     sLog.outString();
-
-#ifdef ENABLE_ACHIEVEMENTS
-    sAchievementsMgr.Init();
-#endif
 
     // after SD2
     sLog.outString("Loading spell scripts...");
