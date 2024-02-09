@@ -67,7 +67,6 @@
 #include "Cinematics/CinematicMgr.h"
 #include "Maps/TransportMgr.h"
 #include "Anticheat/Anticheat.hpp"
-#include "AI/ScriptDevAI/scripts/custom/Transmogrification.h"
 
 #ifdef BUILD_AHBOT
  #include "AuctionHouseBot/AuctionHouseBot.h"
@@ -1016,8 +1015,6 @@ void World::LoadConfigSettings(bool reload)
     setConfig(CONFIG_FLOAT_HEROIC_ZULAMAN_DIFF, "Solocraft.ZulAmanH", 5.0);
     setConfig(CONFIG_FLOAT_HEROIC_SUNWELL5MANFIX_DIFF, "Solocraft.Sunwell5ManFixH", 5.0);
     //End Solocraft Config
-
-    sTransmogrification->LoadConfig(reload);
 
     setConfig(CONFIG_UINT32_DUAL_SPEC_ITEM_ID, "Custom.DualSpecItemId", 17731);
     setConfig(CONFIG_UINT32_DUAL_SPEC_COST, "Custom.DualSpecCost", 10000000);
