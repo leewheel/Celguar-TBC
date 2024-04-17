@@ -1388,15 +1388,6 @@ void WorldSession::SetNoAnticheat()
 
 #endif
 
-#ifdef ENABLE_PLAYERBOTS
-
-void WorldSession::SetNoAnticheat()
-{
-    m_anticheat.reset(new NullSessionAnticheat(this));
-}
-
-#endif
-
 void WorldSession::AfkStateChange(bool state)
 {
     if (state)
