@@ -177,10 +177,6 @@ void Creature::AddToWorld()
     ///- Register the creature for guid lookup
     if (!IsInWorld())
     {
-#ifdef ENABLE_MODULES
-        sModuleMgr.OnAddToWorld(this);
-#endif
-
         if (IsUnit())
             GetMap()->GetObjectsStore().insert<Creature>(GetObjectGuid(), (Creature*)this);
         if (GetDbGuid())
@@ -213,6 +209,10 @@ void Creature::AddToWorld()
 
     if (m_countSpawns)
         GetMap()->AddToSpawnCount(GetObjectGuid());
+
+#ifdef ENABLE_MODULES
+    sModuleMgr.OnAddToWorld(this);
+#endif
 }
 
 void Creature::RemoveFromWorld()
