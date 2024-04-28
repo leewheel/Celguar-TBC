@@ -1629,6 +1629,11 @@ void World::SetInitialWorldSettings()
 #ifdef ENABLE_PLAYERBOTS
     sPlayerbotAIConfig.Initialize();
 #endif
+
+#ifdef ENABLE_MODULES
+    sModuleMgr.OnWorldInitialized();
+#endif
+
     sLog.outString("---------------------------------------");
     sLog.outString("      CMANGOS: World initialized       ");
     sLog.outString("---------------------------------------");
