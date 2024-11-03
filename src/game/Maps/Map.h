@@ -40,6 +40,9 @@
 #include "Maps/MapDataContainer.h"
 #include "Util/UniqueTrackablePtr.h"
 #include "World/WorldStateVariableManager.h"
+#ifdef BUILD_ELUNA
+#include "LuaEngine/LuaValue.h"
+#endif
 
 #ifdef BUILD_ELUNA
 #include "LuaEngine/LuaValue.h"
